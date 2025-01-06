@@ -8,6 +8,7 @@ body {
   justify-content: center;
   align-items: center;
   min-height: 100vh;
+  overflow-x: hidden; /* Prevent horizontal scrolling */
 }
 
 #table-container {
@@ -20,8 +21,9 @@ body {
   background-color: #ffffff;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   border-radius: 10px;
-  overflow-x: auto; /* Ensures tables are scrollable on smaller screens */
+  display: none; /* Hide the container by default */
 }
+
 #main-container {
   text-align: center;
   display: flex;
@@ -60,13 +62,6 @@ h1 {
   border: 1px solid #ccc;
   border-radius: 5px;
 }
-
-#table-container {
-  margin-top: 20px;
-  width: 90%;
-  max-width: 1000px;
-}
-
 
 table {
   width: 100%;

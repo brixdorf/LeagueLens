@@ -44,11 +44,14 @@ function generateTable(data) {
 
   table.appendChild(tbody);
   tableContainer.innerHTML = "";
+  tableContainer.style.display = "block"; // Show the table container
   tableContainer.appendChild(table);
 }
 
 async function fetchFootballData(leagueCode) {
   if (!leagueCode) {
+    const tableContainer = document.getElementById("table-container");
+    tableContainer.style.display = "none"; // Hide table if no league selected
     return;
   }
 
