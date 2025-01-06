@@ -7,97 +7,57 @@
     <style>
       body {
         font-family: Arial, sans-serif;
-        margin: 0;
+        margin: 20px;
         background-color: #f4f4f9;
         color: #333;
-        display: flex;
-        justify-content: center;
-        align-items: flex-start;
-        height: 100vh;
-        flex-direction: column;
-        padding: 20px;
-        overflow: hidden; /* Prevents any overflow from pushing the content off-screen */
       }
-
-      .content {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        width: 100%;
-        transition: all 0.3s ease;
-      }
-
       table {
         width: 100%;
         border-collapse: collapse;
-        margin-top: 20px;
+        margin: 20px 0;
         background-color: #fff;
-        margin-bottom: 20px;
       }
-
       table th,
       table td {
         padding: 10px;
         text-align: center;
         border: 1px solid #ddd;
       }
-
       table th {
         background-color: #0073e6;
         color: #fff;
       }
-
       table tr:nth-child(even) {
         background-color: #f9f9f9;
       }
-
       img {
         width: 40px;
         height: auto;
       }
-
       .team-name {
         display: flex;
         align-items: center;
         gap: 10px;
         justify-content: center;
       }
-
       select {
-        padding: 10px;
+        padding: 5px;
         font-size: 16px;
         margin: 10px;
-        transition: margin-top 0.3s ease;
-        position: relative;
-      }
-
-      .dropdown-at-top select {
-        margin-top: 10px;
-      }
-
-      .dropdown-at-top {
-        margin-top: 0;
-      }
-
-      /* Ensures that when the dropdown moves to the top, the content adjusts */
-      .content.has-league-selected {
-        margin-top: 20px;
       }
     </style>
   </head>
   <body>
-    <div class="content" id="content">
-      <h1>Football Standings</h1>
-      <select id="league-selector">
-        <option value="">Select League</option>
-        <option value="PL">Premier League</option>
-        <option value="BL1">Bundesliga</option>
-        <option value="FL1">Ligue 1</option>
-        <option value="SA">Serie A</option>
-        <option value="PD">La Liga</option>
-      </select>
-      <div id="table-container"></div>
-    </div>
+    <h1>Football Standings</h1>
+    <select id="league-selector">
+      <option value="">Select League</option>
+      <option value="PL">Premier League</option>
+      <option value="BL1">Bundesliga</option>
+      <option value="FL1">Ligue 1</option>
+      <option value="SA">Serie A</option>
+      <option value="PD">La Liga</option>
+    </select>
+    <div id="table-container"></div>
 
     <script>
       // Function to generate the table
@@ -109,7 +69,7 @@
         const table = document.createElement("table");
 
         // Add table header
-        table.innerHTML = `
+        table.innerHTML = 
           <thead>
             <tr>
               <th>Position</th>
@@ -124,13 +84,13 @@
               <th>Goal Difference</th>
             </tr>
           </thead>
-        `;
+        ;
 
         // Add table body
         const tbody = document.createElement("tbody");
         standings.forEach((team) => {
           const row = document.createElement("tr");
-          row.innerHTML = `
+          row.innerHTML = 
             <td>${team.position}</td>
             <td class="team-name">
               <img src="${team.team.crest}" alt="${team.team.name} logo">
@@ -144,7 +104,7 @@
             <td>${team.goalsFor}</td>
             <td>${team.goalsAgainst}</td>
             <td>${team.goalDifference}</td>
-          `;
+          ;
           tbody.appendChild(row);
         });
 
@@ -159,7 +119,7 @@
           return; // Do nothing if no league is selected
         }
 
-        const response = await fetch(`/api/fetchFootballData?league=${leagueCode}`);
+        const response = await fetch(/api/fetchFootballData?league=${leagueCode});
         const data = await response.json();
         generateTable(data);
       }
@@ -167,15 +127,11 @@
       // Add event listener to the league dropdown
       document.getElementById("league-selector").addEventListener("change", (event) => {
         const leagueCode = event.target.value;
-
-        // Move dropdown to the top
-        const content = document.getElementById("content");
-        content.classList.add("has-league-selected"); // Apply class to adjust content positioning
-        content.classList.add("dropdown-at-top"); // Move dropdown to the top
-
-        // Fetch and display data for selected league
         fetchFootballData(leagueCode);
       });
+
+      // Fetch default league (Premier League) data when the page loads
+      fetchFootballData('PL');
     </script>
   </body>
 </html>
