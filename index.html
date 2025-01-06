@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Football Standings</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+        background-color: #f4f4f9;
+        color: #333;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 20px 0;
+        background-color: #fff;
+      }
+      table th,
+      table td {
+        padding: 10px;
+        text-align: center;
+        border: 1px solid #ddd;
+      }
+      table th {
+        background-color: #0073e6;
+        color: #fff;
+      }
+      table tr:nth-child(even) {
+        background-color: #f9f9f9;
+      }
+      img {
+        width: 40px;
+        height: auto;
+      }
+      .team-name {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        justify-content: center;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Premier League Standings</h1>
+    <div id="table-container"></div>
+    <script>
+      // Function to generate the table
+      function generateTable(data) {
+        const standings = data.standings[0].table;
+        const tableContainer = document.getElementById("table-container");
+
+        // Create table element
+        const table = document.createElement("table");
+
+        // Add table header
+        table.innerHTML = `
+                <thead>
+                    <tr>
+                        <th>Position</th>
+                        <th>Team</th>
+                        <th>Played</th>
+                        <th>Won</th>
+                        <th>Draw</th>
+                        <th>Lost</th>
+                        <th>Points</th>
+                        <th>Goals For</th>
+                        <th>Goals Against</th>
+                        <th>Goal Difference</th>
+                    </tr>
+                </thead>
+            `;
+
+        // Add table body
+        const tbody = document.createElement("tbody");
+        standings.forEach((team) => {
+          const row = document.createElement("tr");
+          row.innerHTML = `
+                    <td>${team.position}</td>
+                    <td class="team-name">
+                        <img src="${team.team.crest}" alt="${team.team.name} logo">
+                        ${team.team.name}
+                    </td>
+                    <td>${team.playedGames}</td>
+                    <td>${team.won}</td>
+                    <td>${team.draw}</td>
+                    <td>${team.lost}</td>
+                    <td>${team.points}</td>
+                    <td>${team.goalsFor}</td>
+                    <td>${team.goalsAgainst}</td>
+                    <td>${team.goalDifference}</td>
+                `;
+          tbody.appendChild(row);
+        });
+
+        table.appendChild(tbody);
+        tableContainer.appendChild(table);
+      }
+
+      // Function to fetch data from the API
+      async function fetchFootballData() {
+        const apiUrl = "https://api.football-data.org/v4/competitions/PL/standings"; // Replace with the actual API URL
+        const apiKey = "626c6ec9004d42ee9d313cfb843ee5e9"; // Replace with your actual API key
+
+        try {
+          // Send a GET request to the API
+          const response = await fetch(apiUrl, {
+            method: "GET",
+            headers: {
+              "X-Auth-Token": apiKey, // Required header for authentication
+            },
+          });
+
+          // Check if the response is OK (status 200)
+          if (!response.ok) {
+            throw new Error(
+              `Error: ${response.status} - ${response.statusText}`
+            );
+          }
+
+          // Parse the JSON response
+          const data = await response.json();
+
+          // Call the function to generate the table
+          generateTable(data);
+        } catch (error) {
+          // Handle errors (e.g., network issues or API errors)
+          console.error("Failed to fetch football data:", error);
+          const tableContainer = document.getElementById("table-container");
+          tableContainer.innerHTML = `<p>Failed to load data. Please try again later.</p>`;
+        }
+      }
+
+      // Call the function to fetch data when the page loads
+      fetchFootballData();
+    </script>
+  </body>
+</html>
