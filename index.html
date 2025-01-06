@@ -6,47 +6,31 @@
     <title>Football Standings</title>
     <style>
       body {
-        font-family: Arial, sans-serif;
-        margin: 0;
-        padding: 0;
-        background-color: #f4f4f9;
-        color: #333;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        height: 100vh;
-        transition: all 0.3s ease-in-out;
-      }
-      h1 {
-        margin: 20px 0;
-      }
-      .header {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        transition: transform 0.3s ease-in-out;
-      }
-      .header.moved {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        padding: 10px 20px;
-        background-color: #f4f4f9;
-        border-bottom: 2px solid #ddd;
-        align-items: flex-start;
-      }
-      select {
-        padding: 10px;
-        font-size: 16px;
-        margin: 10px;
-      }
-      #table-container {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f4f4f9;
+  color: #333;
+}
+
+h1 {
+  text-align: center;
+  margin-top: 20px;
+}
+
+#dropdown-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 20vh; /* Center dropdown initially */
+  transition: margin 0.5s ease; /* Smoothly move to the top */
+}
+
+#table-container {
   margin-top: 20px;
   width: 90%;
-  max-width: 800px; /* Adjust if necessary */
+  max-width: 1000px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 table {
@@ -56,44 +40,52 @@ table {
   background-color: #fff;
 }
 
-      table th,
-      table td {
-        padding: 10px;
-        text-align: center;
-        border: 1px solid #ddd;
-      }
-      table th {
-        background-color: #0073e6;
-        color: #fff;
-      }
-      table tr:nth-child(even) {
-        background-color: #f9f9f9;
-      }
-      img {
-        width: 40px;
-        height: auto;
-      }
-      .team-name {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        justify-content: center;
-      }
+table th,
+table td {
+  padding: 10px;
+  text-align: center;
+  border: 1px solid #ddd;
+}
+
+table th {
+  background-color: #0073e6;
+  color: #fff;
+}
+
+table tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+img {
+  width: 40px;
+  height: auto;
+}
+
+.team-name {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  justify-content: center;
+}
+
     </style>
   </head>
   <body>
-    <div class="header" id="header">
-      <h1 id="title">Football Standings</h1>
-      <select id="league-selector">
-        <option value="">Select League</option>
-        <option value="PL">Premier League</option>
-        <option value="BL1">Bundesliga</option>
-        <option value="FL1">Ligue 1</option>
-        <option value="SA">Serie A</option>
-        <option value="PD">La Liga</option>
-      </select>
+    <div id="main-container">
+      <h1>Football Standings</h1>
+      <div id="dropdown-container">
+        <select id="league-selector">
+          <option value="">Select League</option>
+          <option value="PL">Premier League</option>
+          <option value="BL1">Bundesliga</option>
+          <option value="FL1">Ligue 1</option>
+          <option value="SA">Serie A</option>
+          <option value="PD">La Liga</option>
+        </select>
+      </div>
+      <div id="table-container"></div>
     </div>
-    <div id="table-container"></div>
+    
 
     <script>
       // Function to generate the table
@@ -170,6 +162,20 @@ table {
 
         fetchFootballData(leagueCode);
       });
+
+      document.getElementById("league-selector").addEventListener("change", (event) => {
+  const leagueCode = event.target.value;
+
+  if (leagueCode) {
+    // Move dropdown to the top
+    const dropdownContainer = document.getElementById("dropdown-container");
+    dropdownContainer.style.marginTop = "20px"; // Moves dropdown to top
+    dropdownContainer.style.transition = "margin 0.5s ease"; // Smooth animation
+
+    fetchFootballData(leagueCode);
+  }
+});
+
     </script>
   </body>
 </html>
