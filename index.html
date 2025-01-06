@@ -7,9 +7,46 @@
     <style>
       body {
         font-family: Arial, sans-serif;
-        margin: 20px;
+        margin: 0;
+        padding: 0;
         background-color: #f4f4f9;
         color: #333;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        transition: all 0.3s ease-in-out;
+      }
+      h1 {
+        margin: 20px 0;
+      }
+      .header {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        transition: transform 0.3s ease-in-out;
+      }
+      .header.moved {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        padding: 10px 20px;
+        background-color: #f4f4f9;
+        border-bottom: 2px solid #ddd;
+        align-items: flex-start;
+      }
+      select {
+        padding: 10px;
+        font-size: 16px;
+        margin: 10px;
+      }
+      #table-container {
+        margin-top: 20px;
+        width: 90%;
+        max-width: 800px;
       }
       table {
         width: 100%;
@@ -40,23 +77,20 @@
         gap: 10px;
         justify-content: center;
       }
-      select {
-        padding: 5px;
-        font-size: 16px;
-        margin: 10px;
-      }
     </style>
   </head>
   <body>
-    <h1>Football Standings</h1>
-    <select id="league-selector">
-      <option value="">Select League</option>
-      <option value="PL">Premier League</option>
-      <option value="BL1">Bundesliga</option>
-      <option value="FL1">Ligue 1</option>
-      <option value="SA">Serie A</option>
-      <option value="PD">La Liga</option>
-    </select>
+    <div class="header" id="header">
+      <h1 id="title">Football Standings</h1>
+      <select id="league-selector">
+        <option value="">Select League</option>
+        <option value="PL">Premier League</option>
+        <option value="BL1">Bundesliga</option>
+        <option value="FL1">Ligue 1</option>
+        <option value="SA">Serie A</option>
+        <option value="PD">La Liga</option>
+      </select>
+    </div>
     <div id="table-container"></div>
 
     <script>
@@ -127,11 +161,13 @@
       // Add event listener to the league dropdown
       document.getElementById("league-selector").addEventListener("change", (event) => {
         const leagueCode = event.target.value;
+
+        // Move header to top
+        const header = document.getElementById("header");
+        header.classList.add("moved");
+
         fetchFootballData(leagueCode);
       });
-
-      // Fetch default league (Premier League) data when the page loads
-      fetchFootballData('PL');
     </script>
   </body>
 </html>
