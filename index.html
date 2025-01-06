@@ -16,36 +16,52 @@
         height: 100vh;
         flex-direction: column;
         transition: all 0.3s ease;
+        overflow: hidden; /* Prevent scrolling before league selection */
       }
+
+      .content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        transition: all 0.3s ease;
+      }
+
       table {
         width: 100%;
         border-collapse: collapse;
         margin: 20px 0;
         background-color: #fff;
       }
+
       table th,
       table td {
         padding: 10px;
         text-align: center;
         border: 1px solid #ddd;
       }
+
       table th {
         background-color: #0073e6;
         color: #fff;
       }
+
       table tr:nth-child(even) {
         background-color: #f9f9f9;
       }
+
       img {
         width: 40px;
         height: auto;
       }
+
       .team-name {
         display: flex;
         align-items: center;
         gap: 10px;
         justify-content: center;
       }
+
       select {
         padding: 5px;
         font-size: 16px;
@@ -54,16 +70,18 @@
     </style>
   </head>
   <body>
-    <h1>Football Standings</h1>
-    <select id="league-selector">
-      <option value="">Select League</option>
-      <option value="PL">Premier League</option>
-      <option value="BL1">Bundesliga</option>
-      <option value="FL1">Ligue 1</option>
-      <option value="SA">Serie A</option>
-      <option value="PD">La Liga</option>
-    </select>
-    <div id="table-container"></div>
+    <div class="content">
+      <h1>Football Standings</h1>
+      <select id="league-selector">
+        <option value="">Select League</option>
+        <option value="PL">Premier League</option>
+        <option value="BL1">Bundesliga</option>
+        <option value="FL1">Ligue 1</option>
+        <option value="SA">Serie A</option>
+        <option value="PD">La Liga</option>
+      </select>
+      <div id="table-container"></div>
+    </div>
 
     <script>
       // Function to generate the table
@@ -75,7 +93,7 @@
         const table = document.createElement("table");
 
         // Add table header
-        table.innerHTML = ` 
+        table.innerHTML = `
           <thead>
             <tr>
               <th>Position</th>
@@ -134,8 +152,10 @@
       document.getElementById("league-selector").addEventListener("change", (event) => {
         const leagueCode = event.target.value;
 
-        // Move dropdown to top
-        document.body.style.alignItems = "flex-start";
+        // Move dropdown to the top and adjust layout
+        document.body.style.overflow = "auto"; // Allow scrolling after selection
+        document.querySelector(".content").style.alignItems = "flex-start"; // Move to top
+        document.querySelector(".content").style.marginTop = "20px"; // Adjust margin for better spacing
 
         // Fetch and display data for selected league
         fetchFootballData(leagueCode);
