@@ -7,9 +7,15 @@
     <style>
       body {
         font-family: Arial, sans-serif;
-        margin: 20px;
+        margin: 0;
         background-color: #f4f4f9;
         color: #333;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        flex-direction: column;
+        transition: all 0.3s ease;
       }
       table {
         width: 100%;
@@ -69,7 +75,7 @@
         const table = document.createElement("table");
 
         // Add table header
-        table.innerHTML = `
+        table.innerHTML = ` 
           <thead>
             <tr>
               <th>Position</th>
@@ -127,11 +133,13 @@
       // Add event listener to the league dropdown
       document.getElementById("league-selector").addEventListener("change", (event) => {
         const leagueCode = event.target.value;
+
+        // Move dropdown to top
+        document.body.style.alignItems = "flex-start";
+
+        // Fetch and display data for selected league
         fetchFootballData(leagueCode);
       });
-
-      // Fetch default league (Premier League) data when the page loads
-      fetchFootballData('PL');
     </script>
   </body>
 </html>
