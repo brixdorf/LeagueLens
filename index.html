@@ -100,27 +100,11 @@
 
       // Function to fetch data from the API
       // Function to fetch data from the proxy route
-async function fetchFootballData() {
-  const apiUrl = '/api/proxy'; // Now call the Vercel API route
-
-  try {
-    const response = await fetch(apiUrl, {
-      method: 'GET',
-    });
-
-    if (!response.ok) {
-      throw new Error(`Error: ${response.status} - ${response.statusText}`);
-    }
-
-    const data = await response.json(); // Process the data
-    generateTable(data); // Call your function to display the table
-  } catch (error) {
-    console.error('Failed to fetch football data:', error);
-    const tableContainer = document.getElementById('table-container');
-    tableContainer.innerHTML = `<p>Failed to load data. Please try again later.</p>`;
-  }
-}
-
+      async function fetchFootballData() {
+        const response = await fetch("/api/fetchFootballData");
+        const data = await response.json();
+        generateTable(data);
+      }
 
       // Call the function to fetch data when the page loads
       fetchFootballData();
