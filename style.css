@@ -8,7 +8,7 @@ body {
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  overflow-x: hidden; /* Prevent horizontal scrolling */
+  overflow-x: hidden;
 }
 
 #table-container {
@@ -21,7 +21,7 @@ body {
   background-color: #ffffff;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   border-radius: 10px;
-  display: none; /* Hide the container by default */
+  display: none;
 }
 
 #main-container {
@@ -29,7 +29,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 20px; /* Adds spacing between elements */
+  gap: 20px;
 }
 
 h1 {
@@ -44,7 +44,7 @@ h1 {
 }
 
 #main-para {
-  width: 80%; /* Make the paragraph responsive */
+  width: 80%;
   max-width: 700px;
   font-size: 20px;
   overflow-wrap: break-word;
@@ -68,12 +68,12 @@ table {
   border-collapse: collapse;
   margin: 20px 0;
   background-color: #fff;
-  font-size: 16px; /* Slightly larger text for readability */
+  font-size: 16px;
 }
 
 table th,
 table td {
-  padding: 15px; /* Increase padding for better spacing */
+  padding: 15px;
   text-align: center;
   border: 1px solid #ddd;
 }
@@ -82,7 +82,7 @@ table th {
   background-color: #0073e6;
   color: #fff;
   font-weight: bold;
-  text-transform: uppercase; /* Adds a professional look */
+  text-transform: uppercase;
 }
 
 table tr:nth-child(even) {
@@ -90,25 +90,25 @@ table tr:nth-child(even) {
 }
 
 table tr:hover {
-  background-color: #f1f1f1; /* Highlight row on hover */
+  background-color: #f1f1f1;
 }
 
 img {
   width: 40px;
   height: auto;
-  border-radius: 50%; /* Rounded team logos */
+  border-radius: 50%;
 }
 
 .team-name {
   display: flex;
   align-items: center;
   gap: 10px;
-  justify-content: flex-start; /* Align team names to the left */
+  justify-content: flex-start;
 }
 
 @media screen and (max-width: 768px) {
   table {
-    font-size: 14px; /* Adjust font size for smaller screens */
+    font-size: 14px;
   }
 
   table th,
