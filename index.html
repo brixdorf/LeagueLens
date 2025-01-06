@@ -15,7 +15,6 @@
         align-items: center;
         height: 100vh;
         flex-direction: column;
-        transition: all 0.3s ease;
       }
 
       .content {
@@ -24,13 +23,13 @@
         align-items: center;
         width: 100%;
         transition: all 0.3s ease;
-        margin-top: 20px; /* Start with some margin on top */
+        margin-top: 20px; /* Centered initially */
       }
 
       table {
         width: 100%;
         border-collapse: collapse;
-        margin: 20px 0;
+        margin-top: 20px; /* Keeps table separated */
         background-color: #fff;
       }
 
@@ -67,11 +66,17 @@
         font-size: 16px;
         margin: 10px;
         transition: margin-top 0.3s ease;
+        position: relative;
+      }
+
+      /* Added a class for dropdown when it moves to the top */
+      .dropdown-at-top select {
+        margin-top: 10px; /* Adjust dropdown margin when moved to top */
       }
     </style>
   </head>
   <body>
-    <div class="content">
+    <div class="content" id="content">
       <h1>Football Standings</h1>
       <select id="league-selector">
         <option value="">Select League</option>
@@ -154,8 +159,8 @@
         const leagueCode = event.target.value;
 
         // Move dropdown to the top
-        const dropdown = document.getElementById("league-selector");
-        dropdown.style.marginTop = "0"; // Move it to the top
+        const content = document.getElementById("content");
+        content.classList.add("dropdown-at-top"); // Apply the class to move the dropdown
 
         // Fetch and display data for selected league
         fetchFootballData(leagueCode);
