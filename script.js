@@ -81,3 +81,16 @@ document
       fetchFootballData(leagueCode);
     }
   });
+
+  function displayLeagueTable(leagueData) {
+    const tableContainer = document.getElementById('table-container');
+    const table = document.querySelector('#table-container table');
+  
+    if (leagueData && leagueData.length > 0) {
+      tableContainer.style.display = 'block'; // Show container when data is available
+      table.innerHTML = generateTableHTML(leagueData); // Populate table with data
+    } else {
+      tableContainer.style.display = 'none'; // Hide container if no data
+    }
+  }
+  
