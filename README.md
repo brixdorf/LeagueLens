@@ -7,5 +7,5 @@
 - 📝 Detailed table with wins, losses, points, position, goals and more...
 ## API
 I have used the [Football-data.org](https://www.football-data.org/) API for fetching the latest data from all the major leagues.
-## Endnotes
+## About
 This project is created by **Romit Raj Sahu** bearing Roll no. **24BCS10436**.
