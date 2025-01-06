@@ -2,7 +2,7 @@
 
 export default async function handler(req, res) {
   const apiUrl = "https://api.football-data.org/v4/competitions/PL/standings"; // Replace with your API URL
-  const apiKey = "626c6ec9004d42ee9d313cfb843ee5e9"; // Replace with your actual API key
+  const apiKey = process.env.API_KEY; // Store your API key in environment variables
 
   try {
     const response = await fetch(apiUrl, {
