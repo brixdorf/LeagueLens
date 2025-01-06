@@ -15,7 +15,8 @@
         align-items: flex-start;
         height: 100vh;
         flex-direction: column;
-        padding: 20px; /* Added padding to prevent overflow */
+        padding: 20px;
+        overflow: hidden; /* Prevents any overflow from pushing the content off-screen */
       }
 
       .content {
@@ -24,15 +25,14 @@
         align-items: center;
         width: 100%;
         transition: all 0.3s ease;
-        margin-top: 50px; /* Start with some space for center alignment */
       }
 
       table {
         width: 100%;
         border-collapse: collapse;
-        margin-top: 20px; /* Keeps table separated */
+        margin-top: 20px;
         background-color: #fff;
-        margin-bottom: 20px; /* Adds bottom margin to prevent cutoff */
+        margin-bottom: 20px;
       }
 
       table th,
@@ -71,20 +71,17 @@
         position: relative;
       }
 
-      /* Adjust dropdown when it moves to the top */
       .dropdown-at-top select {
         margin-top: 10px;
       }
 
-      /* Ensure the content doesn't overflow when dropdown moves */
-      .content {
-        padding-top: 20px;
-        transition: margin-top 0.3s ease;
+      .dropdown-at-top {
+        margin-top: 0;
       }
 
-      /* Keep the container fixed at the top */
-      .dropdown-at-top {
-        margin-top: 10px;
+      /* Ensures that when the dropdown moves to the top, the content adjusts */
+      .content.has-league-selected {
+        margin-top: 20px;
       }
     </style>
   </head>
@@ -173,7 +170,8 @@
 
         // Move dropdown to the top
         const content = document.getElementById("content");
-        content.classList.add("dropdown-at-top"); // Apply the class to move the dropdown
+        content.classList.add("has-league-selected"); // Apply class to adjust content positioning
+        content.classList.add("dropdown-at-top"); // Move dropdown to the top
 
         // Fetch and display data for selected league
         fetchFootballData(leagueCode);
