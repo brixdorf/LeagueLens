@@ -12,9 +12,10 @@
         color: #333;
         display: flex;
         justify-content: center;
-        align-items: center;
+        align-items: flex-start;
         height: 100vh;
         flex-direction: column;
+        padding: 20px; /* Added padding to prevent overflow */
       }
 
       .content {
@@ -23,7 +24,7 @@
         align-items: center;
         width: 100%;
         transition: all 0.3s ease;
-        margin-top: 20px; /* Centered initially */
+        margin-top: 50px; /* Start with some space for center alignment */
       }
 
       table {
@@ -31,6 +32,7 @@
         border-collapse: collapse;
         margin-top: 20px; /* Keeps table separated */
         background-color: #fff;
+        margin-bottom: 20px; /* Adds bottom margin to prevent cutoff */
       }
 
       table th,
@@ -69,9 +71,20 @@
         position: relative;
       }
 
-      /* Added a class for dropdown when it moves to the top */
+      /* Adjust dropdown when it moves to the top */
       .dropdown-at-top select {
-        margin-top: 10px; /* Adjust dropdown margin when moved to top */
+        margin-top: 10px;
+      }
+
+      /* Ensure the content doesn't overflow when dropdown moves */
+      .content {
+        padding-top: 20px;
+        transition: margin-top 0.3s ease;
+      }
+
+      /* Keep the container fixed at the top */
+      .dropdown-at-top {
+        margin-top: 10px;
       }
     </style>
   </head>
