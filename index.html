@@ -69,7 +69,7 @@
         const table = document.createElement("table");
 
         // Add table header
-        table.innerHTML = 
+        table.innerHTML = `
           <thead>
             <tr>
               <th>Position</th>
@@ -84,13 +84,13 @@
               <th>Goal Difference</th>
             </tr>
           </thead>
-        ;
+        `;
 
         // Add table body
         const tbody = document.createElement("tbody");
         standings.forEach((team) => {
           const row = document.createElement("tr");
-          row.innerHTML = 
+          row.innerHTML = `
             <td>${team.position}</td>
             <td class="team-name">
               <img src="${team.team.crest}" alt="${team.team.name} logo">
@@ -104,7 +104,7 @@
             <td>${team.goalsFor}</td>
             <td>${team.goalsAgainst}</td>
             <td>${team.goalDifference}</td>
-          ;
+          `;
           tbody.appendChild(row);
         });
 
@@ -119,7 +119,7 @@
           return; // Do nothing if no league is selected
         }
 
-        const response = await fetch(/api/fetchFootballData?league=${leagueCode});
+        const response = await fetch(`/api/fetchFootballData?league=${leagueCode}`);
         const data = await response.json();
         generateTable(data);
       }
