@@ -99,38 +99,28 @@
       }
 
       // Function to fetch data from the API
-      async function fetchFootballData() {
-        const apiUrl = "https://api.football-data.org/v4/competitions/PL/standings"; // Replace with the actual API URL
-        const apiKey = "626c6ec9004d42ee9d313cfb843ee5e9"; // Replace with your actual API key
+      // Function to fetch data from the proxy route
+async function fetchFootballData() {
+  const apiUrl = '/api/proxy'; // Now call the Vercel API route
 
-        try {
-          // Send a GET request to the API
-          const response = await fetch(apiUrl, {
-            method: "GET",
-            headers: {
-              "X-Auth-Token": apiKey, // Required header for authentication
-            },
-          });
+  try {
+    const response = await fetch(apiUrl, {
+      method: 'GET',
+    });
 
-          // Check if the response is OK (status 200)
-          if (!response.ok) {
-            throw new Error(
-              `Error: ${response.status} - ${response.statusText}`
-            );
-          }
+    if (!response.ok) {
+      throw new Error(`Error: ${response.status} - ${response.statusText}`);
+    }
 
-          // Parse the JSON response
-          const data = await response.json();
+    const data = await response.json(); // Process the data
+    generateTable(data); // Call your function to display the table
+  } catch (error) {
+    console.error('Failed to fetch football data:', error);
+    const tableContainer = document.getElementById('table-container');
+    tableContainer.innerHTML = `<p>Failed to load data. Please try again later.</p>`;
+  }
+}
 
-          // Call the function to generate the table
-          generateTable(data);
-        } catch (error) {
-          // Handle errors (e.g., network issues or API errors)
-          console.error("Failed to fetch football data:", error);
-          const tableContainer = document.getElementById("table-container");
-          tableContainer.innerHTML = `<p>Failed to load data. Please try again later.</p>`;
-        }
-      }
 
       // Call the function to fetch data when the page loads
       fetchFootballData();
