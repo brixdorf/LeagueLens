@@ -44,10 +44,15 @@
         margin: 10px;
       }
       #table-container {
-        margin-top: 20px;
-        width: 90%;
-        max-width: 800px;
-      }
+  margin-top: 20px;
+  width: 90%;
+  max-width: 800px;
+  max-height: 60vh; /* Set a maximum height for the table */
+  overflow-y: auto; /* Enable vertical scrolling */
+  border: 1px solid #ddd; /* Optional: Add a border for clarity */
+  background-color: #fff; /* Ensure the background is consistent */
+}
+
       table {
         width: 100%;
         border-collapse: collapse;
